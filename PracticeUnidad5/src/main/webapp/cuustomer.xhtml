@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+</h:head>
+<body>
+	<h1>Cuustomer</h1>
+	<h:form id="frmCuustomer">
+	Name:<h:inputText value="#{cuustomerController.cuustomer.name}" />
+	Address:<h:inputText value="#{cuustomerController.cuustomer.address}" />
+	Phone:<h:inputText value="#{cuustomerController.cuustomer.phone}" />
+	Fax:<h:inputText value="#{cuustomerController.cuustomer.fax}" />
+	Email:<h:inputText value="#{cuustomerController.cuustomer.email}" />
+	Webpage:<h:inputText value="#{cuustomerController.cuustomer.webpage}" />
+	Previousbalance:<h:inputText value="#{cuustomerController.cuustomer.previousbalance}" />
+	Debit:<h:inputText value="#{cuustomerController.cuustomer.debit}" />
+	Credit:<h:inputText value="#{cuustomerController.cuustomer.credit}" />
+	Currentbalance:<h:inputText value="#{cuustomerController.cuustomer.currentbalance}" />
+	
+	
+		<h:commandButton action="#{cuustomerController.save}" value="Save">
+			<f:ajax execute="frmCuustomer" render="frmCuustomer" />
+		</h:commandButton>
+		<h:commandButton rendered="#{cuustomerController.editMode}"
+			action="#{cuustomerController.cancel}" value="Cancel">
+			<f:ajax render="frmCuustomer"></f:ajax>
+		</h:commandButton>
+		<h:dataTable value="#{cuustomerController.cuustomers}" var="f" id="dtCuustomer">
+			<h:column>
+				<f:facet name="header">ID</f:facet>
+		 #{f.id} </h:column>
+			<h:column>
+				<f:facet name="header">Name</f:facet>
+		 #{f.name} </h:column>
+			<h:column>
+				<f:facet name="header">Address</f:facet>
+		 #{f.address} </h:column>
+			<h:column>
+				<f:facet name="header">Phone</f:facet>
+		 #{f.phone} </h:column>
+			<h:column>
+				<f:facet name="header">Fax</f:facet>
+		 #{f.fax} </h:column>
+		 <h:column>
+				<f:facet name="header">Email</f:facet>
+		 #{f.email} </h:column>
+		 <h:column>
+				<f:facet name="header">Webpage</f:facet>
+		 #{f.webpage} </h:column>
+		 <h:column>
+				<f:facet name="header">Previousbalance</f:facet>
+		 #{f.previousbalance} </h:column>
+		 <h:column>
+				<f:facet name="header">Debit</f:facet>
+		 #{f.debit} </h:column>
+		 <h:column>
+				<f:facet name="header">Credit</f:facet>
+		 #{f.credit} </h:column>
+		 <h:column>
+				<f:facet name="header">Currentbalance</f:facet>
+		 #{f.currentbalance} </h:column>
+			<h:column>
+				<f:facet name="header">Actions</f:facet>
+				<h:commandButton action="#{cuustomerController.delete(f)}" value="Delete"
+					onClick="return window.confirm ('Are you sure?')">
+					<f:ajax render="frmCuustomer:dtFruit" />
+				</h:commandButton>
+				<h:commandButton action="#{cuustomerController.update(f)}" value="Update">
+					<f:ajax render="frmCuustomer" />
+				</h:commandButton>
+			</h:column>
+		</h:dataTable>
+	</h:form>
+
+</body>
+
+
+</html>

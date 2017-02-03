@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head></h:head> 
+<body> 
+	<h1>Manager Departament</h1>
+    <h:form id="frmDepartament">
+		Name:  <h:inputText value="#{departamentController.departament.name}"/>
+		Budget: <h:inputText value="#{departamentController.departament.budget}"/>
+		StartDate:  <h:inputText value="#{departamentController.departament.startDate}"/>
+		Administrador:  <h:inputText value="#{departamentController.departament.administrador}"/>
+		   <h:commandButton action="#{departamentController.save}" value="Save">
+			<f:ajax execute="frmDepartament" render="frmDepartament"/>
+		</h:commandButton>
+		<h:commandButton rendered="#{departamentController.editMode}"
+		 	action="#{departamentController.save}" value="Cancel">
+		 		<f:ajax reder="frmDepartament"></f:ajax>
+		 </h:commandButton>
+		
+		<h:dataTable value="#{departamentController.departaments}" var="dep" id="dtDepartament">
+			<h:column>
+				<f:facet name="header">DepartamentId</f:facet>
+				#{dep.departamentId}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Name</f:facet>
+				#{dep.name}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Budget</f:facet>
+				#{dep.budget}
+			</h:column>
+			<h:column>
+				<f:facet name="header">StartDate</f:facet>
+				#{dep.startDate}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Administrador</f:facet>
+				#{dep.administrador}
+			</h:column>
+			<h:column>
+				<f:facet name="header">Actions</f:facet>
+				<h:commandButton action="#{departamentController.delete(dep)}"
+				 value="Delete" onclick="return window.confirm('Are you sure?')">
+				 <f:ajax render="frmDepartament:dtDepartament"/>
+				 </h:commandButton>
+				 <h:commandButton action="#{departamentController.update(dep)}"
+				 value="Update">
+				 <f:ajax render="frmDepartament"/>
+				 </h:commandButton>
+			</h:column>
+		</h:dataTable>
+	</h:form>
+</body> 
+</html>
